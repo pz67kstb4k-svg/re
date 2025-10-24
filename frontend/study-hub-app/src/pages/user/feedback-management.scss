@@ -1,0 +1,373 @@
+/* 自习室风格的反馈管理页面样式 - 微信小程序兼容版 */
+.feedback-management-container {
+  min-height: 100vh;
+  /* 自习室风格的柔和背景渐变 */
+  background: linear-gradient(135deg, #f0f8ff 0%, #f5f5f5 100%);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  
+  /* 装饰性学习元素 - 顶部装饰条 */
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #4fa0e3, #6200ee, #4fa0e3);
+  }
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    margin-bottom: 16px;
+    
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      /* 学习元素图标前缀 */
+      position: relative;
+      &::before {
+        content: '📚';
+        margin-right: 8px;
+      }
+    }
+  }
+
+  .loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 0;
+
+    text {
+      color: #999;
+      font-size: 14px;
+    }
+  }
+
+  .empty {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 0;
+
+    text {
+      color: #999;
+      font-size: 16px;
+      margin-top: 12px;
+    }
+  }
+
+  .feedback-list {
+    padding: 16px;
+
+    .feedback-item {
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+      /* 微信小程序不支持hover伪类，保留基础样式 */
+      /* 可通过JS或WXS实现交互效果 */
+
+      .feedback-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+
+        .username {
+          color: #333;
+          font-size: 14px;
+          font-weight: 600;
+          /* 用户名前添加头像图标 */
+          &::before {
+            content: '👤';
+            margin-right: 6px;
+          }
+        }
+
+        .status {
+          padding: 4px 12px;
+          border-radius: 16px;
+          font-size: 12px;
+          font-weight: bold;
+        }
+
+        .status-pending {
+          background-color: #fff3e0;
+          color: #ff9800;
+          border: 1px solid #ffd54f;
+        }
+
+        .status-processing {
+          background-color: #e3f2fd;
+          color: #2196f3;
+          border: 1px solid #90caf9;
+        }
+
+        .status-resolved {
+          background-color: #e8f5e9;
+          color: #4caf50;
+          border: 1px solid #a5d6a7;
+        }
+
+        .status-rejected {
+          background-color: #ffebee;
+          color: #f44336;
+          border: 1px solid #ef9a9a;
+        }
+      }
+
+      .feedback-content {
+        margin-bottom: 12px;
+
+        .feedback-type {
+          color: #666;
+          font-size: 14px;
+          margin-bottom: 16px;
+          display: inline-block;
+          padding: 4px 12px;
+          background-color: #f8f9fa;
+          border-radius: 20px;
+          font-weight: 500;
+        }
+
+        .content {
+          color: #333;
+          font-size: 14px;
+          line-height: 1.6;
+          margin-bottom: 8px;
+          background-color: #fafafa;
+          padding: 12px;
+          border-radius: 8px;
+          border-left: 3px solid #4fa0e3;
+        }
+
+        .reply-section {
+          background-color: #e8f5fd;
+          padding: 12px;
+          border-radius: 8px;
+          margin-bottom: 8px;
+          border-left: 3px solid #2196f3;
+
+          .reply-label {
+            color: #1976d2;
+            font-weight: bold;
+            font-size: 14px;
+            display: block;
+            margin-bottom: 4px;
+          }
+
+          .reply-content {
+            color: #333;
+            font-size: 14px;
+            line-height: 1.6;
+          }
+        }
+
+        .time {
+          color: #999;
+          font-size: 12px;
+          display: block;
+          text-align: right;
+        }
+      }
+
+      .reply-button {
+        background: linear-gradient(135deg, #4fa0e3, #6200ee);
+        color: white;
+        font-size: 14px;
+        padding: 6px 16px;
+        border-radius: 20px;
+        margin-top: 12px;
+        display: inline-block;
+        border: none;
+        box-shadow: 0 2px 6px rgba(98, 0, 238, 0.3);
+        /* 微信小程序不支持hover和active伪类，保留基础样式 */
+      }
+    }
+  }
+
+  /* 模态框样式 */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+  }
+
+  .modal-content {
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    animation: modalSlideIn 0.3s ease;
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #f0f0f0;
+
+      .modal-title {
+        font-size: 18px;
+        font-weight: bold;
+        color: #333;
+        /* 学习元素图标前缀 */
+        &::before {
+          content: '💬';
+          margin-right: 8px;
+        }
+      }
+
+      .close-button {
+        font-size: 14px;
+        padding: 6px 14px;
+        border-radius: 4px;
+        background-color: #f5f5f5;
+        /* 微信小程序不支持hover伪类，保留基础样式 */
+      }
+    }
+
+    .modal-body {
+      padding: 8px 0;
+    }
+
+    .form-item {
+      margin-bottom: 20px;
+
+      .label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+        color: #333;
+        font-size: 14px;
+      }
+
+      .content {
+        color: #333;
+        font-size: 14px;
+        line-height: 1.6;
+        padding: 12px;
+        background-color: #fafafa;
+        border-radius: 8px;
+        border-left: 3px solid #4fa0e3;
+      }
+
+      .status-selector {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 8px;
+
+        .status-button {
+          font-size: 14px;
+          padding: 6px 14px;
+          border-radius: 20px;
+          background-color: #f5f5f5;
+          /* 微信小程序不支持hover伪类，保留基础样式 */
+            
+          &.active {
+            background: linear-gradient(135deg, #4fa0e3, #6200ee);
+            color: white;
+            box-shadow: 0 2px 6px rgba(98, 0, 238, 0.3);
+          }
+        }
+      }
+
+      .status-hint {
+        font-size: 12px;
+        color: #888;
+        margin-top: 8px;
+        display: block;
+      }
+
+      .reply-input {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        min-height: 100px;
+        font-size: 14px;
+        /* 微信小程序不支持focus伪类，保留基础样式 */
+      }
+    }
+
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      padding: 16px 0 0;
+      border-top: 1px solid #f0f0f0;
+      margin-top: 20px;
+
+      .cancel-button {
+        margin-right: 10px;
+        font-size: 14px;
+        padding: 6px 16px;
+        border-radius: 20px;
+        background-color: #f5f5f5;
+        /* 微信小程序不支持hover伪类，保留基础样式 */
+      }
+
+      .reply-button {
+        background: linear-gradient(135deg, #4fa0e3, #6200ee);
+        color: white;
+        font-size: 14px;
+        padding: 6px 16px;
+        border-radius: 20px;
+        border: none;
+        box-shadow: 0 2px 6px rgba(98, 0, 238, 0.3);
+        /* 微信小程序不支持hover和active伪类，保留基础样式 */
+      }
+    }
+  }
+}
+
+/* 动画效果 */
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 微信小程序特有样式适配 */
+@media screen and (max-width: 768px) {
+  .feedback-management-container {
+    .feedback-item {
+      padding: 12px;
+    }
+    
+    .modal-content {
+      padding: 16px;
+      width: 95%;
+    }
+  }
+}
+
+/* 确保微信小程序兼容性 - 移除不支持的选择器和功能 */
+/* 不使用 CSS 变量、复杂渐变函数等不被小程序支持的特性 */

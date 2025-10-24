@@ -1,0 +1,304 @@
+.reservation-management-container {
+  padding: 20px;
+  min-height: 100vh;
+  /* 自习室风格背景 */
+  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%);
+  /* 添加轻微学习元素装饰 */
+  position: relative;
+  overflow: hidden;
+}
+
+/* 装饰元素 */
+.reservation-management-container::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  width: 120px;
+  height: 120px;
+  background: rgba(147, 197, 253, 0.2);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.reservation-management-container::after {
+  content: '';
+  position: absolute;
+  bottom: -30px;
+  left: -30px;
+  width: 150px;
+  height: 150px;
+  background: rgba(165, 243, 252, 0.2);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.header {
+  padding: 20px;
+  background-color: #fff;
+  margin-bottom: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  /* 顶部轻微装饰 */
+  border-top: 4px solid #3b82f6;
+  z-index: 1;
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1e40af;
+    flex: 1;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+  }
+
+  .back-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background-color: #f0f9ff;
+    
+    .back-icon {
+      font-size: 20px;
+      margin-right: 4px;
+      color: #3b82f6;
+    }
+    
+    .back-text {
+      font-size: 16px;
+      color: #3b82f6;
+      font-weight: 500;
+    }
+  }
+  
+  .back-btn:active {
+    background-color: #e0f2fe;
+    transform: scale(0.98);
+  }
+}
+
+.reservation-list {
+  height: calc(100vh - 120px);
+  z-index: 1;
+  position: relative;
+}
+
+.reservation-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  /* 轻微的顶部装饰条，根据状态变化 */
+  border-top: 3px solid #3b82f6;
+  z-index: 1;
+}
+
+.reservation-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 40px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.05) 0%, transparent 100%);
+  z-index: -1;
+}
+
+.reservation-card:active {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+  transform: translateY(-1px);
+}
+
+.reservation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.room-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #1e40af;
+  display: flex;
+  align-items: center;
+}
+
+.room-name::before {
+  content: '📚';
+  margin-right: 6px;
+  font-size: 16px;
+}
+
+.status {
+  font-size: 14px;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background-color: #f0f9ff;
+  border: 1px solid #93c5fd;
+}
+
+.reservation-info {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.user-info-section {
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+  background-color: #f0f9ff;
+  border-radius: 8px;
+  border-left: 3px solid #3b82f6;
+  margin-bottom: 8px;
+}
+
+.user-label {
+  font-size: 14px;
+  color: #64748b;
+  margin-right: 5px;
+}
+
+.user-name {
+  font-size: 15px;
+  font-weight: bold;
+  color: #3b82f6;
+  margin-right: 5px;
+}
+
+.user-studentId {
+  font-size: 13px;
+  color: #94a3b8;
+  background-color: rgba(59, 130, 246, 0.1);
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.info-item {
+  font-size: 14px;
+  color: #64748b;
+  display: flex;
+  align-items: center;
+  padding: 4px 0;
+}
+
+.info-item::before {
+  content: '•';
+  color: #93c5fd;
+  margin-right: 8px;
+  font-weight: bold;
+}
+
+/* 为不同信息项添加特定图标 */
+.info-item:nth-child(2)::before {
+  content: '🪑';
+  font-size: 16px;
+}
+
+.info-item:nth-child(3)::before {
+  content: '📅';
+  font-size: 16px;
+}
+
+.info-item:nth-child(4)::before {
+  content: '⏰';
+  font-size: 16px;
+}
+
+.info-item:nth-child(5)::before {
+  content: '📍';
+  font-size: 16px;
+}
+
+.empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #94a3b8;
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  margin: 20px 0;
+}
+
+.empty-text::before {
+  content: '📝';
+  font-size: 32px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: #3b82f6;
+  font-size: 16px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  margin: 20px 0;
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .reservation-management-container {
+    padding: 15px;
+  }
+  
+  .header {
+    padding: 15px;
+  }
+  
+  .header .title {
+    font-size: 20px;
+  }
+  
+  .reservation-card {
+    padding: 16px;
+  }
+  
+  .room-name {
+    font-size: 16px;
+  }
+}
+
+/* 微信小程序特有样式调整 */
+@media screen and (min-width: 320px) and (max-width: 768px) {
+  /* 适配小程序端的触摸效果 */
+  .back-btn {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  .reservation-card {
+    -webkit-tap-highlight-color: transparent;
+    /* 增加点击反馈 */
+    transform: translateZ(0);
+    will-change: transform;
+  }
+}

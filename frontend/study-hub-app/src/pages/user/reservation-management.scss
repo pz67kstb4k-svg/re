@@ -1,0 +1,368 @@
+// 预约管理页面样式
+.reservation-management-container {
+  padding: 0 20px 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4eaf1 100%);
+  position: relative;
+  /* 装饰元素 */
+  &::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    z-index: -1;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  margin: 0 -20px 16px;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 20px 20px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.back-button {
+  font-size: 16px;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 6px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  
+  &:active {
+    background: rgba(255, 255, 255, 0.3);
+  }
+}
+
+.loading,
+.empty {
+  text-align: center;
+  padding: 60px 0;
+  color: #666;
+  font-size: 16px;
+  
+  /* 加载动画 */
+  .loading-spinner {
+    width: 30px;
+    height: 30px;
+    margin: 0 auto 15px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #4facfe;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+.reservation-list {
+  padding-bottom: 20px;
+  
+  /* 卡片加载时的动画 */
+  animation: fadeIn 0.5s ease;
+}
+
+.reservation-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e8f0fe;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  
+  /* 卡片顶部装饰条 */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5px;
+    height: 100%;
+    background: linear-gradient(180deg, #4facfe 0%, #00f2fe 100%);
+  }
+  
+  &:active {
+    transform: translateY(2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f8ff;
+}
+
+.room-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2c3e50;
+  display: flex;
+  align-items: center;
+  
+  &::before {
+    content: '🏢';
+    margin-right: 8px;
+    font-size: 20px;
+  }
+}
+
+.status {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+  /* 状态标签的渐变效果 */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    z-index: -1;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+  }
+  
+  &:active::before {
+    opacity: 1;
+  }
+}
+
+.status-pending {
+  background-color: #e6f7ff;
+  color: #1890ff;
+  
+  &::before {
+    background: linear-gradient(135deg, #e6f7ff 0%, #bae7ff 100%);
+  }
+  
+  &::after {
+    content: '⏰';
+    margin-left: 5px;
+  }
+}
+
+.status-checked-in {
+  background-color: #f6ffed;
+  color: #52c41a;
+  
+  &::before {
+    background: linear-gradient(135deg, #f6ffed 0%, #d9f7be 100%);
+  }
+  
+  &::after {
+    content: '✅';
+    margin-left: 5px;
+  }
+}
+
+.status-completed {
+  background-color: #f0f0f0;
+  color: #666;
+  
+  &::before {
+    background: linear-gradient(135deg, #f0f0f0 0%, #d9d9d9 100%);
+  }
+  
+  &::after {
+    content: '✓';
+    margin-left: 5px;
+  }
+}
+
+.status-cancelled,
+.status-no-show {
+  background-color: #fff7e6;
+  color: #fa8c16;
+  
+  &::before {
+    background: linear-gradient(135deg, #fff7e6 0%, #ffe58f 100%);
+  }
+  
+  &::after {
+    content: '❌';
+    margin-left: 5px;
+  }
+}
+
+.card-content {
+  .info-item {
+    display: flex;
+    margin-bottom: 12px;
+    align-items: center;
+    padding-left: 5px;
+    
+    /* 信息项装饰条 */
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 3px;
+      height: 14px;
+      background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      border-radius: 3px;
+      margin-right: 8px;
+    }
+    
+    /* 为不同信息项添加图标 */
+    &:nth-child(1) .label::before {
+      content: '💺';
+      margin-right: 5px;
+    }
+    
+    &:nth-child(2) .label::before {
+      content: '⏰';
+      margin-right: 5px;
+    }
+    
+    &:nth-child(3) .label::before {
+      content: '👤';
+      margin-right: 5px;
+    }
+    
+    &:nth-child(4) .label::before {
+      content: '📝';
+      margin-right: 5px;
+    }
+    
+    &:nth-child(5) .label::before {
+      content: '🕒';
+      margin-right: 5px;
+    }
+  }
+
+  .label {
+    width: 85px;
+    font-size: 14px;
+    color: #666;
+    flex-shrink: 0;
+    font-weight: 500;
+  }
+
+  .value {
+    font-size: 14px;
+    color: #333;
+    flex: 1;
+    word-break: break-all;
+  }
+}
+
+
+
+.user-label {
+  font-size: 14px;
+  color: #666;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  
+  &::before {
+    content: '👤';
+    margin-right: 8px;
+    font-size: 16px;
+  }
+}
+
+.user-name {
+  font-size: 15px;
+  color: #2c3e50;
+  font-weight: 600;
+}
+
+.user-id {
+  font-size: 14px;
+  color: #4facfe;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  
+  &::before {
+    content: '📚';
+    margin-right: 8px;
+    font-size: 14px;
+  }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 375px) {
+  .reservation-management-container {
+    padding: 0 15px 15px;
+  }
+  
+  .header {
+    padding: 15px;
+  }
+  
+  .title {
+    font-size: 18px;
+  }
+  
+  .reservation-card {
+    padding: 15px;
+  }
+  
+  .card-content .info-item .label {
+    width: 75px;
+    font-size: 13px;
+  }
+  
+  .card-content .info-item .value {
+    font-size: 13px;
+  }
+}
+
+/* 微信小程序特有样式适配 */
+page {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4eaf1 100%);
+}
+
+/* 适配微信小程序按钮样式 */
+button {
+  line-height: 1.2;
+}
+
+/* 优化滚动性能 */
+.reservation-list {
+  -webkit-overflow-scrolling: touch;
+}

@@ -1,0 +1,400 @@
+// 自习室风格的用户首页样式 - 微信小程序兼容版
+
+.user-container {
+  padding: 0;
+  background: linear-gradient(135deg, #f5f9ff 0%, #e8f4fe 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  animation: pageLoad 0.5s ease-out;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* 背景装饰元素 - 自习室风格 */
+.user-container::before,
+.user-container::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.user-container::before {
+  top: -30%;
+  right: -30%;
+  width: 100%;
+  height: 100%;
+  background: rgba(24, 144, 255, 0.06);
+}
+
+.user-container::after {
+  bottom: -20%;
+  left: -20%;
+  width: 80%;
+  height: 80%;
+  background: rgba(82, 196, 26, 0.04);
+}
+
+/* 加载和错误状态 */
+.loading, .error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 16px;
+  color: #666;
+  background: linear-gradient(135deg, #f5f9ff 0%, #e8f4fe 100%);
+  position: relative;
+  z-index: 1;
+}
+
+.loading::before {
+  content: '';
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 4px solid rgba(24, 144, 255, 0.1);
+  border-top-color: #1890ff;
+  animation: spin 1s linear infinite;
+  margin-right: 16px;
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.1);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pageLoad {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 用户卡片 - 自习室风格顶部卡片 */
+.user-card {
+  background: linear-gradient(135deg, #1890ff 0%, #36cfc9 100%);
+  padding: 36px 24px;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(24, 144, 255, 0.15);
+  border-radius: 0 0 24px 24px;
+}
+
+/* 装饰性元素 */
+.user-card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+  animation: float 6s ease-in-out infinite;
+}
+
+.user-card::before {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  left: -20px;
+  width: 120px;
+  height: 120px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+}
+
+@keyframes float {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(10%, -10%) rotate(10deg); }
+}
+
+/* 头像容器 */
+.avatar-container {
+  width: 110px;
+  height: 110px;
+  margin: 0 auto 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.avatar {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, white 0%, #f0f9ff 100%);
+  border: 5px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 38px;
+  color: #1890ff;
+  font-weight: bold;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* 用户信息 */
+.user-name {
+  font-size: 26px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 10px;
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.5px;
+}
+
+/* 角色标签 - 基于class的微信小程序兼容方案 */
+.user-role {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.2);
+  padding: 6px 20px;
+  border-radius: 20px;
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 8px;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 角色特定样式 */
+.role-admin {
+  color: #fff;
+  background: linear-gradient(135deg, #faad14, #ff7a45);
+}
+
+.role-user {
+  color: #fff;
+  background: linear-gradient(135deg, #1890ff, #36cfc9);
+}
+
+/* 信息区域 */
+.info-section {
+  background-color: #fff;
+  border-radius: 24px 24px 0 0;
+  padding: 28px 24px;
+  margin-top: -24px;
+  box-shadow: 0 -6px 16px rgba(0, 0, 0, 0.06);
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid #f5f5f5;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 1px solid #f5f5f5;
+  align-items: center;
+}
+
+.info-item:last-child {
+  border-bottom: none;
+}
+
+.info-label {
+  font-size: 15px;
+  color: #666;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.info-label::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  background-color: #1890ff;
+  border-radius: 50%;
+  margin-right: 12px;
+  opacity: 0.8;
+}
+
+.info-value {
+  font-size: 15px;
+  color: #333;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+}
+
+.info-value::after {
+  content: '›';
+  font-size: 20px;
+  color: #999;
+  margin-left: 8px;
+  font-weight: 300;
+}
+
+/* 按钮组容器 */
+.button-group {
+  padding: 0 24px 24px;
+  position: relative;
+  z-index: 2;
+}
+
+/* 功能按钮样式 - 自习室风格卡片式按钮 */
+.feedback-button,
+.feedback-list-button,
+.statistics-button,
+.room-management-button,
+.seat-management-button,
+.reservation-management-button,
+.user-management-button,
+.feedback-management-button,
+.logout-button {
+  width: 100%;
+  height: 56px;
+  margin-bottom: 14px;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  color: #333;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  border: 1px solid #f5f5f5;
+}
+
+/* 功能按钮图标 */
+.feedback-button .icon,
+.feedback-list-button .icon,
+.statistics-button .icon,
+.violations-button .icon,
+.room-management-button .icon,
+.seat-management-button .icon,
+.reservation-management-button .icon,
+.user-management-button .icon,
+.feedback-management-button .icon,
+.logout-button .icon {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  margin-right: 12px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* 功能按钮文本颜色区分 */
+.feedback-button .button-text {
+  color: #1890ff;
+}
+
+.statistics-button .button-text {
+  color: #52c41a;
+}
+
+.violations-button .button-text {
+  color: #faad14;
+}
+
+.room-management-button .button-text,
+.seat-management-button .button-text,
+.reservation-management-button .button-text,
+.user-management-button .button-text,
+.feedback-management-button .button-text {
+  color: #333;
+}
+
+/* 退出登录按钮特殊样式 */
+.logout-button {
+  background: linear-gradient(135deg, #fff 0%, #fff6f6 100%);
+  color: #ff4d4f;
+  border: 2px solid #ff4d4f;
+  margin-top: 24px;
+}
+
+/* 响应式设计 */
+@media (min-width: 768px) {
+  .user-container {
+    max-width: 768px;
+    margin: 0 auto;
+    box-shadow: 0 0 24px rgba(0, 0, 0, 0.06);
+    position: relative;
+    z-index: 1;
+  }
+  
+  .user-card {
+    padding: 48px;
+  }
+  
+  .avatar-container {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .avatar {
+    font-size: 42px;
+  }
+  
+  .info-section {
+    padding: 36px;
+  }
+  
+  .button-group {
+    padding: 0 36px 36px;
+  }
+}
+
+/* 微信小程序兼容性优化 */
+@media screen and (max-width: 768px) {
+  /* 优化小程序中的点击反馈 */
+  .avatar,
+  .info-item,
+  .feedback-button,
+  .feedback-list-button,
+  .statistics-button,
+  .violations-button,
+  .room-management-button,
+  .seat-management-button,
+  .reservation-management-button,
+  .user-management-button,
+  .feedback-management-button,
+  .logout-button {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* 小程序特定优化 */
+  .user-card,
+  .info-section,
+  .feedback-button,
+  .feedback-list-button,
+  .statistics-button,
+  .violations-button,
+  .room-management-button,
+  .seat-management-button,
+  .reservation-management-button,
+  .user-management-button,
+  .feedback-management-button,
+  .logout-button {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* 确保样式在小程序中正常显示 */
+  .user-container::before,
+  .user-container::after {
+    opacity: 0.8;
+  }
+}
+
+/* 微信小程序样式优化 */
+/* 使用基于class的角色样式，避免使用:contains()选择器 */
+/* 移除所有可能导致兼容性问题的高级CSS特性 */
+/* 保持简洁有效的样式定义 */
+/* 所有颜色值直接使用，不依赖CSS变量 */
+/* 动画效果保持简单，确保在小程序中正常运行 */

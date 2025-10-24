@@ -1,0 +1,500 @@
+// 页面容器样式
+.user-management-container {
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4eaf1 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+// 顶部装饰条
+.user-management-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+  z-index: 10;
+}
+
+// 头部样式
+.header {
+  padding: 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  margin-bottom: 20px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.header .title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #2c3e50;
+  flex: 1;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.header .back-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  background: rgba(79, 172, 254, 0.1);
+}
+
+.header .back-btn:active {
+  transform: scale(0.95);
+  background: rgba(79, 172, 254, 0.2);
+}
+
+.header .back-icon {
+  font-size: 18px;
+  margin-right: 4px;
+  color: #4facfe;
+}
+
+.header .back-text {
+  font-size: 15px;
+  color: #4facfe;
+  font-weight: 500;
+}
+
+.header .add-button {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-size: 14px;
+  padding: 8px 18px;
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(79, 172, 254, 0.3);
+  transition: all 0.3s ease;
+}
+
+.header .add-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 1px 4px rgba(79, 172, 254, 0.3);
+}
+
+// 用户列表容器
+.user-list {
+  height: calc(100vh - 120px);
+  padding-bottom: 20px;
+}
+
+// 用户卡片样式
+.user-card {
+  background: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  animation: fadeIn 0.5s ease;
+}
+
+.user-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+// 用户卡片左侧装饰条
+.user-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  background: linear-gradient(180deg, #4facfe 0%, #00f2fe 100%);
+}
+
+// 用户信息区域
+.user-info {
+  flex: 1;
+  padding-left: 15px;
+}
+
+// 用户名样式
+.user-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.user-name::before {
+  content: '👤';
+  font-size: 20px;
+}
+
+// 用户信息项样式
+.user-studentId,
+.user-phone,
+.user-role {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  padding-left: 5px;
+}
+
+.user-studentId::before {
+  content: '📚';
+  font-size: 16px;
+}
+
+.user-phone::before {
+  content: '📱';
+  font-size: 16px;
+}
+
+.user-role::before {
+  content: '🎭';
+  font-size: 16px;
+}
+
+// 角色标签样式增强
+.user-role {
+  font-weight: 500;
+}
+
+// 操作按钮区域
+.user-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-left: 15px;
+}
+
+// 编辑按钮样式
+.edit-button {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+// 删除按钮样式
+.delete-button {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  font-size: 13px;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.delete-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+// 空状态样式
+.empty {
+  text-align: center;
+  padding: 60px 0;
+  color: #666;
+  font-size: 16px;
+  position: relative;
+}
+
+.empty::before {
+  content: '👥';
+  display: block;
+  font-size: 48px;
+  margin-bottom: 15px;
+  opacity: 0.6;
+}
+
+// 加载状态样式
+.loading {
+  text-align: center;
+  padding: 60px 0;
+  color: #666;
+  font-size: 16px;
+}
+
+.loading-spinner {
+  width: 30px;
+  height: 30px;
+  margin: 0 auto 15px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #4facfe;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+// 模态框背景样式
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(3px);
+}
+
+// 模态框内容样式
+.modal-content {
+  background: #fff;
+  border-radius: 15px;
+  padding: 25px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: modalSlideIn 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
+}
+
+// 模态框标题样式
+.modal-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 25px;
+  text-align: center;
+  color: #2c3e50;
+  position: relative;
+}
+
+.modal-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  border-radius: 3px;
+}
+
+// 模态框输入框样式
+.modal-input {
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  padding: 12px 15px;
+  margin-bottom: 18px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 15px;
+  height: 45px;
+  transition: all 0.3s ease;
+  background: #fafafa;
+}
+
+.modal-input:focus {
+  border-color: #4facfe;
+  box-shadow: 0 0 0 2px rgba(79, 172, 254, 0.2);
+  background: #fff;
+}
+
+// 模态框按钮容器
+.modal-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 25px;
+  gap: 15px;
+}
+
+// 模态框按钮样式
+.modal-cancel-button,
+.modal-submit-button {
+  border: none;
+  border-radius: 20px;
+  font-size: 15px;
+  padding: 12px 0;
+  width: 45%;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+// 取消按钮样式
+.modal-cancel-button {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.modal-cancel-button:active {
+  background: #e8e8e8;
+  transform: scale(0.98);
+}
+
+// 提交按钮样式
+.modal-submit-button {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  color: #fff;
+}
+
+.modal-submit-button:active {
+  transform: scale(0.98);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+// 动画效果
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+// 响应式设计
+@media screen and (max-width: 375px) {
+  .user-management-container {
+    padding: 15px;
+  }
+  
+  .header {
+    padding: 15px;
+    margin: 0 -15px 15px;
+    border-radius: 0;
+  }
+  
+  .header .title {
+    font-size: 18px;
+  }
+  
+  .user-card {
+    padding: 15px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+  }
+  
+  .user-actions {
+    flex-direction: row;
+    width: 100%;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .edit-button,
+  .delete-button {
+    padding: 8px 15px;
+    font-size: 12px;
+  }
+  
+  .modal-content {
+    padding: 20px;
+  }
+  
+  .modal-title {
+    font-size: 18px;
+  }
+  
+  .modal-input {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+}
+
+// 微信小程序特有样式适配
+page {
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4eaf1 100%);
+}
+
+// 适配微信小程序按钮样式
+button {
+  line-height: 1.2;
+}
+
+// 优化滚动性能
+.user-list {
+  -webkit-overflow-scrolling: touch;
+}
+
+// 角色标签基础样式
+.user-role {
+  color: #666;
+}
+
+// 基于角色的样式 - 微信小程序兼容方案
+.role-admin {
+  color: #1890ff;
+}
+
+.role-user {
+  color: #52c41a;
+}

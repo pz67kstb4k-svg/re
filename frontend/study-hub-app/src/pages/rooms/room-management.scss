@@ -1,0 +1,625 @@
+.room-management-container {
+  padding: 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f9f7f2 0%, #e8f0f0 50%, #f5f7f3 100%);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  /* 微信小程序兼容 */
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 添加学习元素装饰背景 */
+.room-management-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%239C92AC' fill-opacity='0.08'%3E%3Cpath fill-rule='evenodd' d='M0 0h40v40H0V0zm40 40h40v40H40V40zm0-40h2l-2 2V0zm0 4l4-4h2l-6 6V4zm0 4l8-8h2L40 10V8zm0 4L52 0h2L40 14v-2zm0 4L56 0h2L40 18v-2zm0 4L60 0h2L40 22v-2zm0 4L64 0h2L40 26v-2zm0 4L68 0h2L40 30v-2zm0 4L72 0h2L40 34v-2zm0 4L76 0h2L40 38v-2zm0 4L80 0v2L42 40h-2zm4 0L80 4v2L46 40h-2zm4 0L80 8v2L50 40h-2zm4 0l28-28v2L54 40h-2zm4 0l24-24v2L58 40h-2zm4 0l20-20v2L62 40h-2zm4 0l16-16v2L66 40h-2zm4 0l12-12v2L70 40h-2zm4 0l8-8v2l-6 6h-2zm4 0l4-4v2l-2 2h-2z'/%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  margin-bottom: 20px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  animation: fadeIn 0.5s ease-out;
+  
+  .title {
+    font-size: 22px;
+    font-weight: 600;
+    color: #2c3e50;
+    flex: 1;
+    text-align: center;
+    margin: 0 10px;
+    position: relative;
+  }
+
+  .title::before {
+    content: '📚';
+    position: relative;
+    margin-right: 8px;
+    display: inline-block;
+    animation: float 2s ease-in-out infinite;
+  }
+
+  .back-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    
+    .back-icon {
+      font-size: 18px;
+      color: #4a6fa5;
+      margin-right: 4px;
+    }
+    
+    .back-text {
+      font-size: 15px;
+      color: #4a6fa5;
+      font-weight: 500;
+    }
+    
+    &:active {
+      transform: scale(0.95);
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  .add-button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    padding: 10px 16px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    &:active::before {
+      width: 300px;
+      height: 300px;
+    }
+    
+    &:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+    }
+  }
+}
+
+.room-list {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 20px;
+  /* 自定义滚动条样式 */
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 3px;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+  }
+}
+
+.room-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  /* 添加纸张纹理效果 */
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.9) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.9) 1px, transparent 1px);
+  background-size: 20px 20px;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* 顶部装饰条 */
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  }
+}
+
+.room-info {
+  flex: 1;
+  padding-right: 16px;
+}
+
+.room-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.room-name::before {
+  content: '🏢';
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.room-location {
+  font-size: 15px;
+  color: #4a6fa5;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.room-location::before {
+  content: '📍';
+  margin-right: 6px;
+}
+
+.room-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+
+.room-capacity,
+.room-time {
+  font-size: 13px;
+  color: #7f8c8d;
+  background-color: #f8f9fa;
+  padding: 4px 8px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.room-capacity::before {
+  content: '👥';
+  margin-right: 4px;
+}
+
+.room-time::before {
+  content: '⏰';
+  margin-right: 4px;
+}
+
+.room-description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  background-color: rgba(248, 249, 250, 0.8);
+  padding: 8px 12px;
+  border-radius: 8px;
+  border-left: 3px solid #667eea;
+}
+
+.room-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.edit-button,
+.delete-button {
+  width: 80px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 10px;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+}
+
+.delete-button {
+  background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  color: #fff;
+}
+
+.edit-button::before,
+.delete-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.edit-button:active::before,
+.delete-button:active::before {
+  width: 200px;
+  height: 200px;
+}
+
+.edit-button:active,
+.delete-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+  font-size: 15px;
+  animation: fadeIn 0.6s ease-out;
+  
+  &::before {
+    content: '📝';
+    display: block;
+    font-size: 48px;
+    margin-bottom: 16px;
+    opacity: 0.7;
+  }
+}
+
+.loading {
+  text-align: center;
+  padding: 60px 20px;
+  color: #999;
+  font-size: 15px;
+  animation: fadeIn 0.6s ease-out;
+  
+  &::before {
+    content: '';
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin-bottom: 16px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid #667eea;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+  background: linear-gradient(135deg, #ffffff 0%, #f9f7f2 100%);
+  border-radius: 20px;
+  padding: 24px;
+  width: 90%;
+  max-width: 420px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  animation: slideUp 0.4s ease-out;
+  position: relative;
+  /* 纸张纹理效果 */
+  background-image: linear-gradient(to right, rgba(255, 255, 255, 0.8) 1px, transparent 1px),
+                    linear-gradient(to bottom, rgba(255, 255, 255, 0.8) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-bottom: 24px;
+  text-align: center;
+  position: relative;
+  padding-bottom: 12px;
+}
+
+.modal-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 3px;
+}
+
+.modal-input {
+  border: 2px solid #e1e5e9;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 16px;
+  min-height: 56px;
+  background-color: rgba(255, 255, 255, 0.9);
+  transition: all 0.3s ease;
+  
+  &:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+  }
+  
+  &::placeholder {
+    color: #adb5bd;
+  }
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 24px;
+  gap: 12px;
+}
+
+.modal-cancel-button,
+.modal-submit-button {
+  border: none;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  padding: 12px 20px;
+  width: 48%;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-cancel-button {
+  background-color: #f8f9fa;
+  color: #6c757d;
+  border: 1px solid #dee2e6;
+}
+
+.modal-submit-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.modal-cancel-button::before,
+.modal-submit-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.modal-cancel-button:active::before,
+.modal-submit-button:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+.modal-cancel-button:active {
+  transform: scale(0.95);
+}
+
+.modal-submit-button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.4);
+}
+
+/* 动画定义 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* 响应式设计 - 微信小程序适配 */
+@media (max-width: 768px) {
+  .room-management-container {
+    padding: 16px;
+  }
+  
+  .header {
+    padding: 16px;
+    border-radius: 12px;
+  }
+  
+  .title {
+    font-size: 18px;
+    margin: 0 8px;
+  }
+  
+  .back-text {
+    display: none;
+  }
+  
+  .add-button {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .room-card {
+    padding: 16px;
+    border-radius: 12px;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .room-info {
+    width: 100%;
+    margin-bottom: 12px;
+  }
+  
+  .room-name {
+    font-size: 16px;
+  }
+  
+  .room-details {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .room-actions {
+    width: 100%;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  
+  .edit-button,
+  .delete-button {
+    width: 70px;
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  
+  .modal-content {
+    width: 95%;
+    padding: 20px;
+    border-radius: 16px;
+  }
+  
+  .modal-title {
+    font-size: 18px;
+  }
+  
+  .modal-input {
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+}
+
+/* 微信小程序特有的样式调整 */
+:global(.wx-app) .room-management-container {
+  background-attachment: fixed;
+}
+
+:global(.wx-app) .header {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+:global(.wx-app) .room-card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+:global(.wx-app) .back-btn,
+:global(.wx-app) .add-button,
+:global(.wx-app) .edit-button,
+:global(.wx-app) .delete-button,
+:global(.wx-app) .modal-cancel-button,
+:global(.wx-app) .modal-submit-button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 优化微信小程序中的触摸反馈 */
+:global(.wx-app) .back-btn:active,
+:global(.wx-app) .add-button:active,
+:global(.wx-app) .edit-button:active,
+:global(.wx-app) .delete-button:active,
+:global(.wx-app) .modal-cancel-button:active,
+:global(.wx-app) .modal-submit-button:active {
+  opacity: 0.85;
+  transform: scale(0.98);
+}

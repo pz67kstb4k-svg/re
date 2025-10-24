@@ -1,0 +1,460 @@
+.index-container {
+  padding: 20px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e4eaf0 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.index-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(24,144,255,0.05) 0%, transparent 70%);
+  z-index: 0;
+}
+
+.header {
+  margin-bottom: 25px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  padding: 15px 0;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #1890ff;
+  display: block;
+  background: linear-gradient(45deg, #1890ff, #36cfc9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 15px;
+  color: #666;
+  display: block;
+  margin-top: 5px;
+  font-weight: 500;
+}
+
+.banner {
+  height: 180px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.banner-item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: bold;
+  position: relative;
+  overflow: hidden;
+}
+
+.banner-1 {
+  background: linear-gradient(135deg, #1890ff, #36cfc9);
+}
+
+.banner-2 {
+  background: linear-gradient(135deg, #52c41a, #73d13d);
+}
+
+.banner-3 {
+  background: linear-gradient(135deg, #722ed1, #9254de);
+}
+
+.banner-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 50%);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% { opacity: 0.2; }
+  50% { opacity: 0.4; }
+  100% { opacity: 0.2; }
+}
+
+.banner-text {
+  font-size: 22px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  padding: 0 20px;
+  text-align: center;
+}
+
+.quick-actions {
+  display: flex;
+  justify-content: space-around;
+  margin: 25px 0;
+  position: relative;
+  z-index: 1;
+}
+
+.action-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 110px;
+}
+
+.action-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, #1890ff, #40a9ff);
+  transition: all 0.3s ease;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 15px rgba(24, 144, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.action-item::after {
+  content: '';
+  position: absolute;
+  top: -20%;
+  right: -20%;
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.action-item:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 10px rgba(24, 144, 255, 0.2);
+}
+
+.action-container:nth-child(2) .action-item {
+  background: linear-gradient(135deg, #52c41a, #73d13d);
+  box-shadow: 0 4px 15px rgba(82, 196, 26, 0.3);
+}
+
+.action-container:nth-child(2) .action-item:active {
+  box-shadow: 0 2px 10px rgba(82, 196, 26, 0.2);
+}
+
+.action-icon {
+  width: 40px;
+  height: 40px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.rooms-icon {
+  background-color: white;
+  mask-size: 80%;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-size: 80%;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  border-radius: 8px;
+}
+
+.reservation-icon {
+  background-color: white;
+  mask-size: 80%;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  -webkit-mask-size: 80%;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  border-radius: 8px;
+}
+
+.action-text {
+  font-size: 14px;
+  color: #333;
+  font-weight: 600;
+  text-align: center;
+  margin-top: 8px;
+}
+
+.section {
+  background-color: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-bottom: 25px;
+  position: relative;
+  z-index: 1;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+
+.section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 5px;
+  height: 100%;
+  background: linear-gradient(180deg, #1890ff, #36cfc9);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-left: 10px;
+}
+
+.section-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  align-items: center;
+}
+
+.section-title::before {
+  content: '';
+  width: 6px;
+  height: 20px;
+  background-color: #1890ff;
+  border-radius: 3px;
+  margin-right: 10px;
+}
+
+.section-more {
+  font-size: 14px;
+  color: #1890ff;
+  display: flex;
+  align-items: center;
+  transition: color 0.3s ease;
+}
+
+.section-more:active {
+  color: #40a9ff;
+}
+
+.room-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.room-card {
+  background: linear-gradient(135deg, #ffffff, #f8f9fa);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e8e8e8;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.room-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(24, 144, 255, 0.05), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.room-card:active {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  border-color: #1890ff;
+}
+
+.room-card:active::after {
+  transform: translateX(100%);
+}
+
+.room-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  display: block;
+  margin-bottom: 8px;
+  position: relative;
+}
+
+.room-location, .room-capacity, .room-time {
+  font-size: 13px;
+  color: #666;
+  display: block;
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+.room-occupancy {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0 12px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.room-reservation-count {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1890ff;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.occupied-seats {
+  color: #f5222d;
+}
+
+.available-seats {
+  color: #52c41a;
+}
+
+.room-status {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 16px;
+  background-color: rgba(24, 144, 255, 0.1);
+  margin-top: 8px;
+}
+
+.room-status.available {
+  color: #52c41a;
+  background-color: rgba(82, 196, 26, 0.1);
+}
+
+.room-status.full {
+  color: #f5222d;
+  background-color: rgba(245, 34, 45, 0.1);
+}
+
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+  gap: 15px;
+}
+
+.loading-spinner {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+  border: 3px solid #f3f3f3;
+  border-top: 3px solid #1890ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.loading-text {
+  color: #666;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.empty {
+  text-align: center;
+  padding: 40px 0;
+  color: #999;
+  font-size: 15px;
+  background-color: #fafafa;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.empty::before {
+  content: '📚';
+  font-size: 40px;
+  display: block;
+  margin-bottom: 15px;
+  opacity: 0.5;
+}
+
+/* 底部装饰 */
+.home-footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px 0 20px;
+  position: relative;
+  z-index: 1;
+  margin-top: 10px;
+}
+
+.footer-text {
+  color: #999;
+  font-size: 13px;
+  font-style: italic;
+  background: linear-gradient(45deg, #999, #bbb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 动画类支持 */
+.fade-in {
+  animation: fadeIn 0.3s ease-out both;
+}
+
+.slide-up {
+  animation: slideUp 0.4s ease-out both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

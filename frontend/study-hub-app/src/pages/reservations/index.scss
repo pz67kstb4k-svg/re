@@ -1,0 +1,423 @@
+.reservations-container {
+  padding: 20px;
+  background: #f0f9ff;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.reservations-container::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 40%;
+  height: 40%;
+  background: rgba(24, 144, 255, 0.05);
+  border-radius: 50%;
+  z-index: 0;
+}
+
+
+
+.header {
+  margin-bottom: 25px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+  padding: 15px 0;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  padding-right: 20px;
+  border: 1px solid #f0f0f0;
+  
+  .back-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    border-radius: 8px;
+    transition: all 0.3s;
+    background: #1890ff;
+    box-shadow: 0 4px 10px rgba(24, 144, 255, 0.2);
+    margin-right: 20px;
+    
+    .back-icon {
+      font-size: 20px;
+      color: white;
+      margin-right: 6px;
+    }
+    
+    .back-text {
+      font-size: 16px;
+      color: white;
+      font-weight: 600;
+    }
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #1890ff;
+    flex: 1;
+    text-align: center;
+    background: linear-gradient(45deg, #1890ff, #36cfc9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+.reservation-list {
+  height: calc(100vh - 120px);
+  padding-bottom: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.reservation-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+  position: relative;
+  z-index: 1;
+  border: 1px solid #f0f0f0;
+}
+
+/* 移除伪元素，改用边框实现左侧指示线 */
+.reservation-card {
+  border-left: 5px solid #1890ff;
+}
+
+.reservation-card:active {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.reservation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.room-name {
+  font-size: 22px;
+  font-weight: bold;
+  color: #262626;
+  position: relative;
+  letter-spacing: 0.5px;
+  transition: color 0.3s;
+}
+
+.room-name:active {
+  color: #1890ff;
+}
+
+.status {
+  display: inline-block;
+  font-size: 13px;
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  transition: all var(--transition-speed);
+  position: relative;
+  overflow: hidden;
+}
+
+/* 移除伪元素，简化状态标签 */
+.status:active {
+  opacity: 0.8;
+}
+
+.status-primary {
+  background-color: rgba(24, 144, 255, 0.1);
+}
+
+.status-warning {
+  background-color: rgba(250, 173, 20, 0.1);
+}
+
+.status-success {
+  background-color: rgba(82, 196, 26, 0.1);
+}
+
+.status-secondary {
+  background-color: rgba(140, 140, 140, 0.1);
+}
+
+.status-error {
+  background-color: rgba(245, 34, 45, 0.1);
+}
+
+.reservation-info {
+  margin-bottom: 20px;
+  padding: 16px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.info-item {
+  font-size: 14px;
+  color: #8c8c8c;
+  display: block;
+  margin-bottom: 8px;
+  padding-left: 16px;
+  position: relative;
+  font-weight: 500;
+}
+
+.info-item::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #1890ff;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.info-item:last-child {
+  margin-bottom: 0;
+}
+
+/* 按钮容器 */
+.button-container {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+/* 按钮通用样式 */
+.cancel-button,
+.check-in-button,
+.scan-check-in-button,
+.direct-check-in-button {
+  border: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* 取消按钮 */
+.cancel-button {
+  width: 100%;
+  height: 46px;
+  background: #ff4d4f;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 16px;
+  box-shadow: 0 4px 8px rgba(245, 34, 45, 0.2);
+}
+
+/* 签到按钮 */
+.check-in-button {
+  width: 100%;
+  height: 46px;
+  background: #1890ff;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 16px;
+  box-shadow: 0 4px 8px rgba(24, 144, 255, 0.2);
+  margin-bottom: 12px;
+}
+
+/* 扫描签到按钮 */
+.scan-check-in-button {
+  width: 48%;
+  height: 46px;
+  background: #52c41a;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 4px 8px rgba(82, 196, 26, 0.2);
+}
+
+/* 直接签到按钮 */
+.direct-check-in-button {
+  width: 48%;
+  height: 46px;
+  background: #1890ff;
+  color: #fff;
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 4px 8px rgba(24, 144, 255, 0.2);
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.empty-icon {
+  font-size: 80px;
+  margin-bottom: 24px;
+  color: rgba(24, 144, 255, 0.1);
+}
+
+.empty-text {
+  font-size: 16px;
+  color: #8c8c8c;
+  margin-bottom: 30px;
+  font-weight: 500;
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+.create-button {
+  width: 160px;
+  height: 48px;
+  background: #1890ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(24, 144, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* 加载状态 */
+.loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 80px 20px;
+  position: relative;
+  z-index: 1;
+  min-height: 300px;
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgba(24, 144, 255, 0.1);
+  border-top: 3px solid #1890ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+.loading-text {
+  font-size: 14px;
+  color: #8c8c8c;
+  font-weight: 500;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .reservations-container {
+    padding: 15px;
+  }
+  
+  .reservations-container::before,
+  .reservations-container::after {
+    width: 60%;
+    height: 60%;
+  }
+  
+  .header {
+    padding: 12px 15px;
+  }
+  
+  .header .title {
+    font-size: 22px;
+  }
+  
+  .header .back-btn {
+    padding: 8px 12px;
+    margin-right: 15px;
+  }
+  
+  .reservation-card {
+    padding: 20px;
+    margin-bottom: 15px;
+  }
+  
+  .room-name {
+    font-size: 20px;
+  }
+  
+  .button-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .scan-check-in-button,
+  .direct-check-in-button {
+    width: 100%;
+    margin-top: 0;
+  }
+  
+  .reservation-info {
+    padding: 12px;
+  }
+  
+  .create-button {
+    width: 140px;
+    height: 44px;
+  }
+  
+  .empty-icon {
+    font-size: 64px;
+  }
+}
+
+/* 微信小程序兼容性优化 */
+@media screen and (max-width: 768px) {
+  /* 适配小程序的滚动行为 */
+  .reservation-list {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* 优化小程序中的点击反馈 */
+  .back-btn,
+  .cancel-button,
+  .check-in-button,
+  .scan-check-in-button,
+  .direct-check-in-button,
+  .create-button {
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/* 定义简化的CSS变量，确保微信小程序兼容性 */
+/* 移除CSS变量，直接使用颜色值 */
+/* 为保证微信小程序兼容性，避免使用CSS变量 */

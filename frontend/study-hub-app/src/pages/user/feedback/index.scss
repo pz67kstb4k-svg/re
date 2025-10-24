@@ -1,0 +1,134 @@
+.feedback-container {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    .back-btn {
+      display: flex;
+      align-items: center;
+
+      .back-icon {
+        font-size: 18px;
+        color: #666;
+        margin-right: 5px;
+      }
+
+      .back-text {
+        font-size: 16px;
+        color: #666;
+      }
+    }
+
+    .title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      flex: 1;
+      text-align: center;
+      margin: 0 20px;
+    }
+  }
+
+  .form-section {
+    padding: 20px;
+
+    .form-item {
+      margin-bottom: 24px;
+      background-color: #fff;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+
+      .form-label {
+        display: block;
+        font-size: 16px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 12px;
+      }
+
+      .picker-view {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #f0f0f0;
+        width: 100%;
+
+        .picker-text {
+          font-size: 15px;
+          color: #333;
+          flex: 1;
+        }
+
+        .picker-arrow {
+          color: #999;
+          font-size: 14px;
+          margin-left: 8px;
+        }
+      }
+
+      .feedback-textarea {
+        width: 100%;
+        min-height: 120px;
+        border: 1px solid #e8e8e8;
+        border-radius: 8px;
+        padding: 12px;
+        font-size: 15px;
+        line-height: 1.6;
+        background-color: #fafafa;
+
+        &:focus {
+          border-color: #1890ff;
+          background-color: #fff;
+        }
+      }
+
+      .char-count {
+        display: block;
+        text-align: right;
+        font-size: 12px;
+        color: #999;
+        margin-top: 8px;
+
+        &.warning {
+          color: #ff4d4f;
+        }
+      }
+    }
+
+    .submit-button {
+      width: 100%;
+      background: linear-gradient(135deg, #1890ff 0%, #096dd9 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 16px;
+      font-size: 16px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(24, 144, 255, 0.3);
+      transition: all 0.3s ease;
+
+      &:active {
+        transform: translateY(1px);
+        box-shadow: 0 2px 8px rgba(24, 144, 255, 0.3);
+      }
+
+      &.submitting {
+        background: #d9d9d9;
+        box-shadow: none;
+        transform: none;
+      }
+    }
+  }
+}

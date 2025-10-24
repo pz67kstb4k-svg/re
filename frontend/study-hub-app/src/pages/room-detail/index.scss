@@ -1,0 +1,728 @@
+.room-detail-container {
+  padding: 0;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 背景装饰元素 */
+.room-detail-container::before {
+  content: '';
+  position: absolute;
+  top: -10%;
+  right: -10%;
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(135deg, rgba(24, 144, 255, 0.05), rgba(255, 255, 255, 0));
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.room-detail-container::after {
+  content: '';
+  position: absolute;
+  bottom: -10%;
+  left: -10%;
+  width: 250px;
+  height: 250px;
+  background: linear-gradient(135deg, rgba(82, 196, 26, 0.05), rgba(255, 255, 255, 0));
+  border-radius: 50%;
+  z-index: 0;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+  position: relative;
+  z-index: 1;
+}
+
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 3px solid rgba(24, 144, 255, 0.1);
+  border-top-color: #1890ff;
+  animation: spin 1s linear infinite;
+  box-shadow: 0 0 20px rgba(24, 144, 255, 0.2);
+}
+
+.loading-text {
+  margin-left: 16px;
+  font-size: 16px;
+  color: #666;
+  font-weight: 500;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* 新增脉冲动画 */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.05);
+  }
+}
+
+.room-header {
+  background: linear-gradient(135deg, #1890ff, #40a9ff);
+  padding: 24px 16px;
+  color: white;
+  position: relative;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  box-shadow: 0 10px 30px rgba(24, 144, 255, 0.2);
+  overflow: hidden;
+}
+
+.room-header::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+  animation: rotateBackground 30s linear infinite;
+}
+
+@keyframes rotateBackground {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.back-btn {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  width: 80px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.back-btn:active {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(0.98);
+}
+
+.back-icon {
+  font-size: 20px;
+  margin-right: 6px;
+  color: white;
+}
+
+.back-text {
+  font-size: 16px;
+  color: white;
+  font-weight: 500;
+}
+
+.room-name {
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  position: relative;
+  z-index: 1;
+  background: linear-gradient(90deg, white, rgba(255, 255, 255, 0.8));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.room-location {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+}
+
+.room-location::before {
+  content: "📍";
+  margin-right: 8px;
+  font-size: 18px;
+}
+
+.room-info {
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.room-capacity,
+.room-time {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.room-capacity::before {
+  content: "👥";
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.room-time::before {
+  content: "⏰";
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.room-occupancy {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.occupied-seats,
+.available-seats {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.9);
+  padding: 6px 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.room-status,
+.room-status-label {
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-right: 16px;
+  margin-bottom: 8px;
+  padding: 6px 16px;
+  border-radius: 16px;
+  position: relative;
+  z-index: 1;
+  backdrop-filter: blur(5px);
+  transition: all 0.3s ease;
+}
+
+.room-status.available {
+  background-color: rgba(82, 196, 26, 0.2);
+  color: #52c41a;
+  border: 1px solid rgba(82, 196, 26, 0.3);
+}
+
+.room-status.full {
+  background-color: rgba(245, 34, 45, 0.2);
+  color: #f5222d;
+  border: 1px solid rgba(245, 34, 45, 0.3);
+}
+
+.room-status-label.open {
+  background-color: rgba(82, 196, 26, 0.2);
+  color: #52c41a;
+  border: 1px solid rgba(82, 196, 26, 0.3);
+}
+
+.room-status-label.closed {
+  background-color: rgba(245, 34, 45, 0.2);
+  color: #f5222d;
+  border: 1px solid rgba(245, 34, 45, 0.3);
+}
+
+.room-description {
+  font-size: 15px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 16px;
+  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(5px);
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.section {
+  background-color: white;
+  padding: 24px;
+  border-radius: 20px;
+  margin: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.5s ease-out;
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.section:active {
+  transform: translateY(2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.section-title::before {
+  content: '';
+  width: 4px;
+  height: 24px;
+  background: linear-gradient(135deg, #1890ff, #40a9ff);
+  border-radius: 2px;
+  margin-right: 12px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 16px;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #1890ff, transparent);
+  border-radius: 1px;
+}
+
+.seat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  padding: 8px;
+}
+
+.seat-item {
+  padding: 20px 12px;
+  border-radius: 16px;
+  text-align: center;
+  cursor: pointer;
+  border: 2px solid #e8e8e8;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  background: linear-gradient(135deg, white, #f8f9fa);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.seat-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  transition: all 0.6s ease;
+}
+
+.seat-item.available {
+  background: linear-gradient(135deg, #f6ffed, #e6f7e6);
+  border-color: #52c41a;
+  color: #52c41a;
+}
+
+.seat-item.available:active {
+  background: linear-gradient(135deg, #52c41a, #73d13d);
+  color: white;
+  transform: scale(0.95);
+  box-shadow: 0 4px 16px rgba(82, 196, 26, 0.3);
+}
+
+.seat-item.available:active::before {
+  left: 100%;
+}
+
+.seat-item.unavailable {
+  background: linear-gradient(135deg, #fff2e8, #fff1e6);
+  border-color: #f5222d;
+  color: #f5222d;
+  cursor: not-allowed;
+  opacity: 0.7;
+  filter: grayscale(30%);
+}
+
+.seat-item.selected {
+  background: linear-gradient(135deg, #1890ff, #40a9ff);
+  border-color: #1890ff;
+  color: white;
+  box-shadow: 0 6px 20px rgba(24, 144, 255, 0.4);
+  transform: scale(1.05);
+  animation: pulse 2s infinite;
+}
+
+.seat-number {
+  font-size: 16px;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.seat-status {
+  font-size: 12px;
+  opacity: 0.8;
+  display: block;
+}
+
+.form-item {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.picker {
+  height: 50px;
+  border: 2px solid #e8e8e8;
+  border-radius: 12px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, white, #fafafa);
+  color: #333;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.03);
+}
+
+.picker:active {
+  border-color: #1890ff;
+  box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.1);
+  transform: translateY(-1px);
+}
+
+.submit-button {
+  width: calc(100% - 32px);
+  height: 56px;
+  background: linear-gradient(135deg, #1890ff, #40a9ff);
+  color: white;
+  border: none;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: 600;
+  margin: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(24, 144, 255, 0.3);
+}
+
+.submit-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: all 0.5s ease;
+}
+
+.submit-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 4px 12px rgba(24, 144, 255, 0.4);
+}
+
+.submit-button:active::before {
+  left: 100%;
+}
+
+.submit-button:disabled {
+  background-color: #d9d9d9;
+  cursor: not-allowed;
+  opacity: 0.7;
+  box-shadow: none;
+}
+
+.empty-room-detail {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  background-color: var(--white, #fff);
+  border-radius: 10px;
+  margin-top: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.empty-text {
+  font-size: 16px;
+  color: var(--text-secondary, #666);
+}
+
+.check-in-out-section {
+  background: linear-gradient(135deg, white, #fafafa);
+  padding: 24px;
+  border-radius: 20px;
+  margin: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.check-in-out-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #1890ff, #40a9ff);
+}
+
+.reservation-info {
+  background-color: #f5f5f5;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.reservation-info div {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 15px;
+  color: #333;
+}
+
+.reservation-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.check-in-button,
+.check-out-button,
+.cancel-button {
+  width: 100%;
+  height: 52px;
+  border: none;
+  border-radius: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.check-in-button {
+  background: linear-gradient(135deg, #52c41a, #73d13d);
+  color: white;
+}
+
+.check-in-button::before,
+.check-out-button::before,
+.cancel-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: all 0.5s ease;
+}
+
+.check-in-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 4px 12px rgba(82, 196, 26, 0.4);
+}
+
+.check-in-button:active::before {
+  left: 100%;
+}
+
+.check-out-button {
+  background: linear-gradient(135deg, #fa8c16, #ffa940);
+  color: white;
+}
+
+.check-out-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 4px 12px rgba(250, 140, 22, 0.4);
+}
+
+.check-out-button:active::before {
+  left: 100%;
+}
+
+.cancel-button {
+  background: linear-gradient(135deg, #f5222d, #ff4d4f);
+  color: white;
+}
+
+.cancel-button:active {
+  transform: translateY(2px);
+  box-shadow: 0 4px 12px rgba(245, 34, 45, 0.4);
+}
+
+.cancel-button:active::before {
+  left: 100%;
+}
+
+/* 响应式设计 */
+@media (min-width: 768px) {
+  .room-detail-container {
+    max-width: 768px;
+    margin: 0 auto;
+  }
+  
+  .seat-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+  }
+}
+
+@media (max-width: 375px) {
+  .room-name {
+    font-size: 22px;
+  }
+  
+  .section {
+    padding: 20px;
+    margin: 12px;
+    border-radius: 16px;
+  }
+  
+  .seat-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 6px;
+  }
+  
+  .seat-item {
+    padding: 16px 10px;
+    border-radius: 14px;
+  }
+  
+  .section-title {
+    font-size: 20px;
+  }
+  
+  .submit-button,
+  .check-in-button,
+  .check-out-button,
+  .cancel-button {
+    height: 48px;
+    font-size: 16px;
+  }
+}
+
+@supports (-webkit-backdrop-filter: blur(10px)) {
+  .back-btn {
+    backdrop-filter: blur(10px);
+  }
+  
+  .room-description {
+    backdrop-filter: blur(5px);
+  }
+}
+
+/* 空状态样式 */
+.empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 32px;
+  color: #666;
+  font-size: 16px;
+}
+
+.loading, .error {
+  text-align: center;
+  padding: 40px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  color: #666;
+  min-height: 400px;
+}
+
+.empty-state-icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+  opacity: 0.3;
+  animation: pulse 2s infinite;
+}
+
+.empty-state-text {
+  font-size: 18px;
+  margin-bottom: 12px;
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+}
+
+.empty-state-subtitle {
+  font-size: 14px;
+  text-align: center;
+  opacity: 0.7;
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  min-height: 400px;
+}
+
+.loading-state-spinner {
+  width: 60px;
+  height: 60px;
+  border: 5px solid #f5f5f5;
+  border-top-color: #1890ff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
